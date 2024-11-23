@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 const TaskInput = ( {inputValue, setInputValue, addTask} ) => {
 
     return (
+      <ul className="list-group">
         <input
               className="text-center list-group-item"
               type="text"
@@ -17,6 +18,7 @@ const TaskInput = ( {inputValue, setInputValue, addTask} ) => {
                 }
               }}
             />
+      </ul>
     )
 }
 
