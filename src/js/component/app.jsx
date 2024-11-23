@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import TaskInput from "./TaskInput";
 
 const App = () => {
 
@@ -114,17 +115,10 @@ const App = () => {
         </h1>
         <ul className="list-group">
           
-            <input
-              className="text-center list-group-item"
-              type="text"
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              placeholder="Insert a new task"
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  addTask();
-                }
-              }}
+            <TaskInput 
+            inputValue={inputValue}
+            setInputValue={setInputValue}
+            addTask={addTask}
             />
 
           {todos.map((item) => (
@@ -170,4 +164,3 @@ const App = () => {
 };
 
 export default App;
- App;
