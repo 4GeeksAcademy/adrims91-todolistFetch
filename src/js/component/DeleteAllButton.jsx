@@ -14,7 +14,7 @@ const DeleteAllButton = ( { deleteAll } ) => {
 }
 
 
-DeleteAllButton.PropTypes = {
+DeleteAllButton.propTypes = {
     deleteAll: PropTypes.func.isRequired
 }
 

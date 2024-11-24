@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 const TaskInput = ( {inputValue, setInputValue, addTask} ) => {
 
     return (
-      <ul className="list-group">
+      <ul className="list-group mb-2">
         <input
               className="text-center list-group-item"
               type="text"
@@ -22,7 +22,7 @@ const TaskInput = ( {inputValue, setInputValue, addTask} ) => {
     )
 }
 
-TaskInput.PropTypes = {
+TaskInput.propTypes = {
     inputValue: PropTypes.string.isRequired,
     setInputValue: PropTypes.func.isRequired,
     addTask: PropTypes.func.isRequired
