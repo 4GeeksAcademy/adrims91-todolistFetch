@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 
-const TaskList = ( { todos,deleteTask } ) => {
+const TaskList = ( { todos,deleteTask, isDone } ) => {
 
     return (
 
@@ -10,19 +10,24 @@ const TaskList = ( { todos,deleteTask } ) => {
             <li 
             key={item.id}
             className="list-group-item">
+              <i
+              onClick={() => {
+                const deleteAnswer = prompt("Do you want to delete the task? Yes/No");
+                return deleteAnswer.toLowerCase() === "yes" ? deleteTask(item.id) : "";
+              }}
+              style={{ float: "left", cursor: "pointer" }}
+              className="fa-solid fa-minus"
+            ></i>
             <b
+            className={`${item.is_done ? 'text-success' : 'text-danger'}`}
               style={{ textTransform: "capitalize" }}
             >
               {item.label.toLowerCase()}
             </b>
             <i
-              onClick={() => {
-                const deleteAnswer = prompt("Do you want to delete the task? Yes/No");
-                return deleteAnswer.toLowerCase() === "yes" ? deleteTask(item.id) : "";
-              }}
-              style={{ float: "right", cursor: "pointer" }}
-              className="fa-solid fa-minus"
-            ></i>
+            onClick={() => isDone(item.id)}
+            style={{float: 'right', cursor: 'pointer'}}
+            className='fa-solid fa-check'></i>
           </li>
           ))}
           <label
@@ -44,8 +49,9 @@ TaskList.propTypes = {
         PropTypes.shape({
             id: PropTypes.number.isRequired,
             label: PropTypes.string.isRequired,
-            done: PropTypes.bool
-        })
+            'is_done': PropTypes.bool.isRequired,
+            isDone: PropTypes.func
+        }).isRequired
     )
 }
 

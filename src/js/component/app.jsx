@@ -79,7 +79,6 @@ const App = () => {
 
       if (response.ok) {
         console.log('Task deleted successfully');
-        setTodos(todos.filter((_, i) => i !== id));
         fetchTasks()
       } else {
         const errorText = await response.text();
@@ -103,6 +102,27 @@ const App = () => {
       console.error('Error, could not delete all tasks', error)
     }
   } 
+
+  const isDone = async (id) => {
+    try{
+      const taskToUpdate = todos.find(task => task.id === id);
+
+      taskToUpdate.is_done = !taskToUpdate.is_done
+
+      const response = await fetch(`https://playground.4geeks.com/todo/todos/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(taskToUpdate)
+      })
+      if (response.ok){
+        setTodos(todos.map(task => task.id === id ? taskToUpdate : task))
+      }
+    }catch(error){
+      console.error('Error, could not change "is_done".', error);
+    }
+  }
   
 
   useEffect(() => {
@@ -124,6 +144,7 @@ return (
           <TaskList 
           todos={todos}
           deleteTask={deleteTask}
+          isDone={isDone}
           />
     </div>
     <DeleteAllButton
